@@ -9,11 +9,13 @@ import csv
 import glob
 import os
 
-from column_mappings import ALIASES
+from column_mappings import ALIASES, LEGACY_COLUMNS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "..", "data", "raw")
-OUT = os.path.join(HERE, "..", "data", "processed", "premier_league_2021_2026.csv")
+OUT = os.path.join(
+    HERE, "..", "data", "processed", "premier_league_2021_2026.csv"
+)
 
 MATCHES_PER_SEASON = 380
 
@@ -55,6 +57,8 @@ def main():
         print(f"  {os.path.basename(f)}: {len(missing)} missing")
     print()
     print(f"Union: {len(union)} columns | common to all files: {len(common)}")
+    absent = [c for c in LEGACY_COLUMNS if c not in union]
+    print(f"Documented columns absent from all files (legacy): {len(absent)}")
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     total = 0
