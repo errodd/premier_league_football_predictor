@@ -1,6 +1,6 @@
-# Canonical column mappings + bookmaker registry, derived from data/documentation.txt.
-# Single source of truth so future seasons with new/renamed columns are recognized
-# without touching the merge logic.
+# Canonical column mappings + bookmaker registry, derived from
+# data/documentation.txt. Single source of truth so future seasons with
+# new/renamed columns are recognized without touching the merge logic.
 
 # Exact column-name aliases -> canonical name (same meaning, two labels).
 ALIASES = {
@@ -22,7 +22,8 @@ ALIASES = {
     "VCCA": "BVCA",
 }
 
-# Bookmaker abbreviation -> name. Includes legacy bookmakers absent from current data.
+# Bookmaker abbreviation -> name. Includes legacy bookmakers absent from
+# the current data.
 BOOKMAKERS = {
     "1XB": "1XBet",
     "B365": "Bet365",
@@ -48,7 +49,8 @@ BOOKMAKERS = {
     "BFE": "Betfair Exchange",
 }
 
-# Columns documented but not present in the current CSVs (recognized, never renamed).
+# Columns documented but not present in the current CSVs (recognized,
+# never renamed).
 LEGACY_COLUMNS = frozenset({
     # match statistics
     "Attendance", "HHW", "AHW", "HFKC", "AFKC", "HO", "AO", "HBP", "ABP",

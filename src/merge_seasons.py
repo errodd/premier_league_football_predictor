@@ -1,3 +1,10 @@
+"""Merge all raw season CSVs into one canonical CSV for machine learning.
+
+Reads data/raw/*.csv, canonicalizes column names via column_mappings,
+reports which columns each file is missing, and writes a single union CSV
+with a Season column.
+"""
+
 import csv
 import glob
 import os
@@ -5,11 +12,18 @@ import os
 from column_mappings import ALIASES
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW = os.path.join(HERE, "..", "raw")
-OUT = os.path.join(HERE, "..", "processed", "premier_league_2021_2026.csv")
+RAW = os.path.join(HERE, "..", "data", "raw")
+OUT = os.path.join(HERE, "..", "data", "processed", "premier_league_2021_2026.csv")
+
+MATCHES_PER_SEASON = 380
 
 
 def main():
+    """Run the analysis report and write the unified dataset.
+
+    Reads every CSV in RAW, canonicalizes headers, prints a report of
+    renames and missing columns, and writes the union CSV to OUT.
+    """
     files = sorted(glob.glob(os.path.join(RAW, "*.csv")))
     headers = {}
     renamed = {}
@@ -56,7 +70,8 @@ def main():
                     writer.writerow(row)
                     total += 1
 
-    assert total == 380 * len(files), f"expected {380 * len(files)} rows, got {total}"
+    expected = MATCHES_PER_SEASON * len(files)
+    assert total == expected, f"expected {expected} rows, got {total}"
     print(f"\nWrote {OUT}: {total} rows x {len(union) + 1} columns")
 
 
