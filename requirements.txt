@@ -1,4 +1,4 @@
-# Runtime dependencies for the Premier League EDA notebook (notebooks/EDA.ipynb)
+# Runtime dependencies for the Premier League notebooks (EDA and data preparation)
 # Install with: pip install -r requirements.txt
 numpy==2.5.2
 pandas==3.0.5
